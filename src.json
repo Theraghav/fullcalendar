@@ -49,7 +49,8 @@
     "main.css",
     "basic/basic.css",
     "agenda/agenda.css",
-    "list/list.css"
+    "list/list.css",
+    "timeslots.css"
   ],
   "fullcalendar.print.css": [
     "common/print.css"

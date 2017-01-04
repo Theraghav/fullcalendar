@@ -462,7 +462,25 @@ function Calendar_constructor(element, overrides) {
 			end.stripTime().add(t.defaultAllDayEventDuration);
 		}
 		else {
-			end.add(t.defaultTimedEventDuration);
+			var slots = this.options.slots;
+			var snapOnSlots = this.options.snapOnSlots;
+			var startTime;
+
+			if(slots && snapOnSlots) {
+				var slot;
+				for (var i = 0; i < slots.length; i++) {
+					slot = slots[i];
+					startTime = zonedStart.clone().time(slot.start);
+
+					if(startTime.isSame(zonedStart)) {
+						end.time(slot.end);
+						break;
+					}
+				}
+			}
+			else {
+				end.add(t.defaultTimedEventDuration);
+			}
 		}
 
 		if (t.getIsAmbigTimezone()) {
